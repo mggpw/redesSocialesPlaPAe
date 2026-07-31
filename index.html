@@ -20,7 +20,7 @@
   }
   .hero {
     background: #002f6c;
-    padding: 28px 24px 20px;
+    padding: 18px 24px 14px;
     position: relative;
     overflow: hidden;
   }
@@ -38,25 +38,22 @@
     border-radius: 50%;
     background: rgba(255,255,255,0.05);
   }
-  .logo-wrap {
-    background: #fff; border-radius: 10px;
-    display: inline-block; padding: 6px 10px; margin-bottom: 18px;
-  }
   .pae-label {
-    font-size: 9px; text-transform: uppercase;
-    letter-spacing: 2px; color: rgba(255,255,255,0.6); margin-bottom: 4px;
+    font-size: 11px; text-transform: uppercase;
+    letter-spacing: 1.5px; color: rgba(255,255,255,0.85); margin-bottom: 3px;
+    font-weight: 700; line-height: 1.4;
   }
   .hero-eyebrow {
-    font-size: 11px; color: #c26087; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px;
+    font-size: 9px; color: #c26087; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px;
   }
   .hero-title {
-    font-size: 22px; font-weight: 800; color: #fff;
-    line-height: 1.2; margin-bottom: 8px;
+    font-size: 16px; font-weight: 800; color: #fff;
+    line-height: 1.2; margin-bottom: 5px; white-space: nowrap;
   }
   .hero-title span { color: #c26087; }
   .hero-sub {
-    font-size: 11px; color: rgba(255,255,255,0.75); line-height: 1.5;
+    font-size: 9px; color: rgba(255,255,255,0.75); line-height: 1.5;
   }
   .conector-row {
     display: flex; align-items: center; gap: 0;
@@ -125,7 +122,7 @@
     display: flex; align-items: center; justify-content: center;
     gap: 16px; padding: 8px 20px 14px;
   }
-  .acred-chip { font-size: 8px; color: #222; display: flex; align-items: center; gap: 4px; }
+  .acred-chip { font-size: 8px; color: #222; display: flex; align-items: center; gap: 4px; font-weight: 600; }
   .cta-block {
     margin: 0 20px 20px; background: #002f6c;
     border-radius: 14px; padding: 16px 18px; text-align: center;
@@ -146,7 +143,7 @@
 
   <!-- HERO -->
   <div class="hero">
-    <svg width="150" height="89" viewBox="49 49 471 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="UNTREF - Universidad Nacional de Tres de Febrero" style="display:block; margin-bottom:14px;">
+    <svg width="120" height="71" viewBox="49 49 471 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="UNTREF - Universidad Nacional de Tres de Febrero" style="display:block; margin-bottom:10px;">
       <defs>
         <clipPath id="clipPath20-header" clipPathUnits="userSpaceOnUse">
           <path d="M 0,195.368 H 412.491 V 0 H 0 Z" />
@@ -167,7 +164,7 @@
     </svg>
     <div class="pae-label">Programa de Posgrados en Política y Administración de la Educación</div>
     <div class="hero-eyebrow">Trayectoria integrada</div>
-    <div class="hero-title" style="white-space:nowrap; font-size:19px;">Dos posgrados, <span>un solo camino</span></div>
+    <div class="hero-title">Dos posgrados, <span>un solo camino</span></div>
     <div class="hero-sub">Especialización + Maestría con reconocimiento de seminarios.<br>Formación para transformar la gestión educativa.</div>
   </div>
 
@@ -185,7 +182,7 @@
       <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">+ 3 Seminarios Electivos</div></div>
       <div class="prog-item" style="margin-top:6px"><div class="prog-dot gris"></div><div class="prog-text prog-meta">15 meses · Trabajo Final</div></div>
     </div>
-    <div class="plus-circle">+</div>
+    <div style="width:36px; height:36px; border-radius:50%; background:#002f6c; color:#fff; font-size:16px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin:0 8px; box-shadow:0 0 0 4px #fff, 0 0 0 5px #dde6f5; position:relative; z-index:2;">↔</div>
     <div class="prog-block right">
       <div class="prog-badge rosa">Maestría</div>
       <div class="prog-title">Política y Administración de la Educación</div>
@@ -197,43 +194,33 @@
     </div>
   </div>
 
-  <!-- ARTICULACIÓN -->
-  <div class="arrow-tag">
-    <span style="font-size:16px">🔗</span>
-    <div class="arrow-tag-text">Los seminarios aprobados en la especialización se <span>acreditan directamente en la maestría</span>.</div>
-  </div>
 
-  <!-- BENEFICIOS -->
-  <div class="beneficios">
-    <div class="ben-item">
-      <div class="ben-icon">🏅</div>
-      <div><div class="ben-label">Acreditados CONEAU</div></div>
+
+  <!-- BENEFICIOS COMPACTOS -->
+  <div style="display:flex; justify-content:space-around; align-items:flex-start; padding: 12px 20px 0; gap:4px;">
+    <div style="display:flex; flex-direction:column; align-items:center; gap:3px; flex:1;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c26087" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/><polyline points="9,11 12,14 15,11"/></svg>
+      <span style="font-size:7px; font-weight:700; color:#c26087; text-align:center; line-height:1.2;">Acreditados<br>CONEAU</span>
     </div>
-    <div class="ben-item">
-      <div class="ben-icon">📅</div>
-      <div><div class="ben-label">Cursada mixta</div><div class="ben-sub">Presencial + remoto sincrónico</div></div>
+    <div style="display:flex; flex-direction:column; align-items:center; gap:3px; flex:1;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c26087" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <span style="font-size:7px; font-weight:700; color:#c26087; text-align:center; line-height:1.2;">Cursada<br>mixta</span>
     </div>
-    <div class="ben-item">
-      <div class="ben-icon">👩‍🏫</div>
-      <div><div class="ben-label">Plantel docente destacado</div></div>
+    <div style="display:flex; flex-direction:column; align-items:center; gap:3px; flex:1;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c26087" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      <span style="font-size:7px; font-weight:700; color:#c26087; text-align:center; line-height:1.2;">Plantel docente<br>destacado</span>
     </div>
-    <div class="ben-item">
-      <div class="ben-icon">🎓</div>
-      <div><div class="ben-label">Descuentos</div><div class="ben-sub">Egresados y docentes UNTREF</div></div>
+    <div style="display:flex; flex-direction:column; align-items:center; gap:3px; flex:1;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c26087" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      <span style="font-size:7px; font-weight:700; color:#c26087; text-align:center; line-height:1.2;">Maipú 71<br>CABA</span>
     </div>
   </div>
 
-  <!-- DATOS -->
-  <div class="acred-row">
-    <div class="acred-chip"><span>✔</span> Maipú 71, CABA</div>
-    <div class="acred-chip"><span>✔</span> Admisión abierta</div>
-  </div>
-
-  <!-- CTA -->
-  <div class="cta-block">
-    <div class="cta-label">Consultá por entrevistas de admisión</div>
-    <a class="cta-btn" href="mailto:pae@untref.edu.ar">pae@untref.edu.ar</a>
-    <div class="cta-hint">Universidad Nacional de Tres de Febrero</div>
+  <!-- CTA COMPACTO -->
+  <div style="margin: 10px 20px 16px; background:#002f6c; border-radius:12px; padding:10px 16px; text-align:center;">
+    <div style="font-size:8.5px; color:rgba(255,255,255,0.65); margin-bottom:6px;">Consultá por entrevistas de admisión</div>
+    <a href="mailto:pae@untref.edu.ar" style="display:block; background:#fff; color:#c26087; border-radius:8px; padding:7px 0; font-size:12px; font-weight:700; text-decoration:none; font-family:'Nunito Sans',sans-serif;">pae@untref.edu.ar</a>
+    <div style="font-size:7.5px; color:rgba(255,255,255,0.4); margin-top:6px;">Universidad Nacional de Tres de Febrero</div>
   </div>
 
 </div>
