@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flyer UNTREF PAE</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75,400;75,900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #e8ecf4; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 32px 16px; font-family: 'Nunito Sans', sans-serif; }
+  .flyer-root {
+    max-width: 420px; width: 100%;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #dde2ec;
+  }
+  .hero {
+    background: #002f6c;
+    padding: 28px 24px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(194,96,135,0.18);
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -20px; left: -20px;
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+  .logo-wrap {
+    background: #fff; border-radius: 10px;
+    display: inline-block; padding: 6px 10px; margin-bottom: 18px;
+  }
+  .pae-label {
+    font-size: 9px; text-transform: uppercase;
+    letter-spacing: 2px; color: rgba(255,255,255,0.6); margin-bottom: 4px;
+  }
+  .hero-eyebrow {
+    font-size: 11px; color: #c26087; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px;
+  }
+  .hero-title {
+    font-size: 22px; font-weight: 800; color: #fff;
+    line-height: 1.2; margin-bottom: 8px;
+  }
+  .hero-title span { color: #c26087; }
+  .hero-sub {
+    font-size: 11px; color: rgba(255,255,255,0.75); line-height: 1.5;
+  }
+  .conector-row {
+    display: flex; align-items: center; gap: 0;
+    padding: 0 20px; margin: 20px 0 4px;
+  }
+  .prog-block {
+    flex: 1; background: #f4f7fd;
+    border-radius: 14px; padding: 14px 14px 12px;
+    border: 1.5px solid #dde6f5; position: relative;
+  }
+  .prog-block.left  { border-top: 3px solid #002f6c; }
+  .prog-block.right { border-top: 3px solid #c26087; }
+  .prog-badge {
+    font-size: 7.5px; text-transform: uppercase; letter-spacing: 1.2px;
+    font-weight: 700; margin-bottom: 6px; display: inline-block;
+    padding: 2px 8px; border-radius: 20px;
+  }
+  .prog-badge.azul { background: #dce9fb; color: #002f6c; }
+  .prog-badge.rosa { background: #f9e4ed; color: #a0405f; }
+  .prog-title {
+    font-size: 11px; font-weight: 700; color: #002f6c;
+    margin-bottom: 8px; line-height: 1.3;
+  }
+  .prog-item { display: flex; align-items: flex-start; gap: 5px; margin-bottom: 4px; }
+  .prog-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    margin-top: 4px; flex-shrink: 0;
+  }
+  .prog-dot.azul { background: #002f6c; }
+  .prog-dot.rosa { background: #c26087; }
+  .prog-dot.gris { background: #aab; }
+  .prog-text { font-size: 9px; color: #3a4a66; line-height: 1.4; }
+  .prog-meta { color: #7a8aaa; }
+  .plus-circle {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: #002f6c; color: #fff;
+    font-size: 20px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin: 0 8px;
+    box-shadow: 0 0 0 4px #fff, 0 0 0 5px #dde6f5;
+    position: relative; z-index: 2;
+  }
+  .arrow-tag {
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    background: #002f6c;
+    margin: 4px 20px 0; border-radius: 10px; padding: 8px 14px;
+  }
+  .arrow-tag-text {
+    font-size: 9px; color: #fff; font-weight: 600;
+    letter-spacing: 0.5px; line-height: 1.4; text-align: center;
+  }
+  .arrow-tag-text span { color: #f4b8cf; }
+  .beneficios {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; padding: 16px 20px 4px;
+  }
+  .ben-item {
+    display: flex; align-items: center; gap: 8px;
+    background: #f8faff; border-radius: 10px;
+    padding: 8px 10px; border: 1px solid #e8eef8;
+  }
+  .ben-icon { font-size: 18px; flex-shrink: 0; }
+  .ben-label { font-size: 8.5px; font-weight: 700; color: #002f6c; line-height: 1.2; }
+  .ben-sub { font-size: 7.5px; color: #7a8aaa; line-height: 1.3; margin-top: 1px; }
+  .acred-row {
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px; padding: 8px 20px 14px;
+  }
+  .acred-chip { font-size: 8px; color: #222; display: flex; align-items: center; gap: 4px; }
+  .cta-block {
+    margin: 0 20px 20px; background: #002f6c;
+    border-radius: 14px; padding: 16px 18px; text-align: center;
+  }
+  .cta-label { font-size: 10px; color: rgba(255,255,255,0.7); margin-bottom: 8px; }
+  .cta-btn {
+    display: block; background: #fff; color: #c26087;
+    border-radius: 10px; padding: 10px 0;
+    font-size: 13px; font-weight: 700; text-decoration: none;
+    font-family: 'Nunito Sans', sans-serif;
+  }
+  .cta-hint { font-size: 9px; color: rgba(255,255,255,0.5); margin-top: 8px; }
+  .untref-logo-sub { font-family: 'Archivo', sans-serif; font-weight: 400; font-stretch: 75%; }
+</style>
+</head>
+<body>
+<div class="flyer-root">
+
+  <!-- HERO -->
+  <div class="hero">
+    <svg width="150" height="89" viewBox="49 49 471 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="UNTREF - Universidad Nacional de Tres de Febrero" style="display:block; margin-bottom:14px;">
+      <defs>
+        <clipPath id="clipPath20-header" clipPathUnits="userSpaceOnUse">
+          <path d="M 0,195.368 H 412.491 V 0 H 0 Z" />
+        </clipPath>
+      </defs>
+      <g transform="matrix(1.3333333,0,0,-1.3333333,0,260.49067)">
+        <path d="M 357.621,54.871 H 54.871 v 11.347 h 302.75 z" style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+        <g clip-path="url(#clipPath20-header)">
+          <g transform="translate(271.9521,85.627)">
+            <path d="M 0,0 V 54.871 H 36.154 V 45.808 H 10.936 V 33.001 h 23.05 V 23.938 H 10.936 V 9.063 h 26.4 V 0 Z M 50.832,0 V 54.871 H 85.509 V 45.808 H 61.767 V 33.001 H 83.341 V 23.938 H 61.767 V 0 Z m -96.737,0 h -10.936 v 54.871 h 22.756 c 12.117,0 18.126,-5.517 18.126,-16.55 0,-8.669 -4.334,-13.004 -8.373,-14.383 L -15.071,0 h -11.92 l -8.078,21.771 h -10.836 z m 0,30.538 h 8.964 c 6.403,0 9.555,1.774 9.555,7.783 0,6.009 -3.152,7.782 -9.555,7.782 h -8.964 z m -45.907,15.171 h -13.89 v 9.162 h 38.813 v -9.162 h -13.89 V 0 H -91.812 Z M -158.11,0 v 54.871 h 12.905 l 18.126,-36.745 h 0.493 v 36.745 h 10.541 V 0 h -12.708 l -18.52,38.222 h -0.493 V 0 Z m -58.81,54.871 h 11.032 V 16.845 c 0,-6.304 3.152,-8.767 9.457,-8.767 6.306,0 9.556,2.463 9.556,8.767 v 38.026 h 10.935 V 16.845 c 0,-11.919 -7.289,-17.83 -20.491,-17.83 -13.2,0 -20.489,5.911 -20.489,17.929 z" style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+          </g>
+        </g>
+      </g>
+      <g class="untref-logo-sub" fill="#ffffff">
+        <text x="73" y="240" font-size="33.95" letter-spacing="5.36">UNIVERSIDAD NACIONAL</text>
+        <text x="73" y="305" font-size="33.95" letter-spacing="5.36">DE TRES DE FEBRERO</text>
+      </g>
+    </svg>
+    <div class="pae-label">Programa de Posgrados en Política y Administración de la Educación</div>
+    <div class="hero-eyebrow">Trayectoria integrada</div>
+    <div class="hero-title" style="white-space:nowrap; font-size:19px;">Dos posgrados, <span>un solo camino</span></div>
+    <div class="hero-sub">Especialización + Maestría con reconocimiento de seminarios.<br>Formación para transformar la gestión educativa.</div>
+  </div>
+
+  <!-- PROGRAMAS -->
+  <div class="conector-row">
+    <div class="prog-block left">
+      <div class="prog-badge azul">Especialización</div>
+      <div class="prog-title">Planeamiento y Gestión de la Educación</div>
+      <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">Planeamiento y Gestión de Políticas Educativas</div></div>
+      <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">Políticas y Sistemas Educativos</div></div>
+      <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">Teorías de la Administración y de las Organizaciones</div></div>
+      <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">Gestión y Evaluación de Programas</div></div>
+      <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">Problemas Filosóficos de la Educación Contemporánea</div></div>
+      <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">Planificación y Gestión de Políticas Públicas</div></div>
+      <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">+ 3 Seminarios Electivos</div></div>
+      <div class="prog-item" style="margin-top:6px"><div class="prog-dot gris"></div><div class="prog-text prog-meta">15 meses · Trabajo Final</div></div>
+    </div>
+    <div class="plus-circle">+</div>
+    <div class="prog-block right">
+      <div class="prog-badge rosa">Maestría</div>
+      <div class="prog-title">Política y Administración de la Educación</div>
+      <div class="prog-item"><div class="prog-dot rosa"></div><div class="prog-text">Epistemología y Métodos de Investigación</div></div>
+      <div class="prog-item"><div class="prog-dot rosa"></div><div class="prog-text">Gestión y Evaluación de Instituciones</div></div>
+      <div class="prog-item"><div class="prog-dot rosa"></div><div class="prog-text">Desarrollo Curricular y Calidad</div></div>
+      <div class="prog-item"><div class="prog-dot rosa"></div><div class="prog-text">+ 4 Seminarios Electivos</div></div>
+      <div class="prog-item" style="margin-top:6px"><div class="prog-dot gris"></div><div class="prog-text prog-meta">24 meses · Tesis</div></div>
+    </div>
+  </div>
+
+  <!-- ARTICULACIÓN -->
+  <div class="arrow-tag">
+    <span style="font-size:16px">🔗</span>
+    <div class="arrow-tag-text">Los seminarios aprobados en la especialización se <span>acreditan directamente en la maestría</span>.</div>
+  </div>
+
+  <!-- BENEFICIOS -->
+  <div class="beneficios">
+    <div class="ben-item">
+      <div class="ben-icon">🏅</div>
+      <div><div class="ben-label">Acreditados CONEAU</div></div>
+    </div>
+    <div class="ben-item">
+      <div class="ben-icon">📅</div>
+      <div><div class="ben-label">Cursada mixta</div><div class="ben-sub">Presencial + remoto sincrónico</div></div>
+    </div>
+    <div class="ben-item">
+      <div class="ben-icon">👩‍🏫</div>
+      <div><div class="ben-label">Plantel docente destacado</div></div>
+    </div>
+    <div class="ben-item">
+      <div class="ben-icon">🎓</div>
+      <div><div class="ben-label">Descuentos</div><div class="ben-sub">Egresados y docentes UNTREF</div></div>
+    </div>
+  </div>
+
+  <!-- DATOS -->
+  <div class="acred-row">
+    <div class="acred-chip"><span>✔</span> Maipú 71, CABA</div>
+    <div class="acred-chip"><span>✔</span> Admisión abierta</div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <div class="cta-label">Consultá por entrevistas de admisión</div>
+    <a class="cta-btn" href="mailto:pae@untref.edu.ar">pae@untref.edu.ar</a>
+    <div class="cta-hint">Universidad Nacional de Tres de Febrero</div>
+  </div>
+
+</div>
+</body>
+</html>
