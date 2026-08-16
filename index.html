@@ -3,230 +3,659 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flyer UNTREF PAE</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<title>UNTREF PAE - Suite de Flyers Instagram</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75,400;75,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,700;0,900;1,700&family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<!-- Librería externa para exportación PNG nativa en HD -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #e8ecf4; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 32px 16px; font-family: 'Nunito Sans', sans-serif; }
-  .flyer-root {
-    max-width: 420px; width: 100%;
-    background: #fff;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid #dde2ec;
+  
+  body {
+    background: #0f172a;
+    color: #f8fafc;
+    font-family: 'Nunito Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    user-select: none;
   }
+
+  /* Toolbar de controles superiores */
+  .toolbar {
+    background: #1e293b;
+    border: 1px solid #334155;
+    padding: 12px 20px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+    width: 100%;
+    max-width: 1100px;
+  }
+
+  .toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .toolbar label {
+    font-size: 13px;
+    font-weight: 800;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .toolbar select, .toolbar button {
+    background: #334155;
+    color: #ffffff;
+    border: 1px solid #475569;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .toolbar select:hover, .toolbar button:hover {
+    background: #475569;
+    border-color: #64748b;
+  }
+
+  .btn-download {
+    background: #ab163f !important;
+    border-color: #c91f4d !important;
+    color: #fff !important;
+    font-weight: 800 !important;
+  }
+
+  .btn-download:hover {
+    background: #8e1033 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(171, 22, 63, 0.4);
+  }
+
+  .badge-dim {
+    background: #0284c7;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  /* Viewport frame para la vista previa */
+  .canvas-viewport {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: auto;
+    padding: 10px 0 40px;
+  }
+
+  .flyer-root {
+    background: #ffffff;
+    color: #1e293b;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8);
+    transform-origin: top center;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
   .hero {
     background: #002f6c;
-    padding: 18px 24px 14px;
     position: relative;
     overflow: hidden;
+    color: #ffffff;
+    flex-shrink: 0;
   }
-  .hero::before {
-    content: '';
-    position: absolute; top: -40px; right: -40px;
-    width: 180px; height: 180px;
+
+  .hero-bg-circle-1 {
+    position: absolute;
+    top: -90px;
+    right: -90px;
+    width: 440px;
+    height: 440px;
     border-radius: 50%;
-    background: rgba(194,96,135,0.18);
+    background: rgba(194, 96, 135, 0.22);
+    pointer-events: none;
   }
-  .hero::after {
-    content: '';
-    position: absolute; bottom: -20px; left: -20px;
-    width: 100px; height: 100px;
+
+  .hero-bg-circle-2 {
+    position: absolute;
+    bottom: -60px;
+    left: -40px;
+    width: 280px;
+    height: 280px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.05);
+    background: rgba(255, 255, 255, 0.06);
+    pointer-events: none;
   }
+
   .pae-label {
-    font-size: 11px; text-transform: uppercase;
-    letter-spacing: 1.5px; color: rgba(255,255,255,0.85); margin-bottom: 3px;
-    font-weight: 700; line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 800;
+    line-height: 1.3;
+    position: relative;
+    z-index: 1;
   }
+
   .hero-eyebrow {
-    font-size: 9px; color: #f29fc5; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px;
+    color: #f29fc5;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
   }
+
   .hero-title {
-    font-size: 16px; font-weight: 800; color: #fff;
-    line-height: 1.2; margin-bottom: 5px; white-space: nowrap;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1.12;
+    position: relative;
+    z-index: 1;
   }
+
   .hero-title span { color: #f29fc5; }
+
   .hero-sub {
-    font-size: 9px; color: rgba(255,255,255,0.75); line-height: 1.5;
+    color: rgba(255, 255, 255, 0.88);
+    line-height: 1.38;
+    position: relative;
+    z-index: 1;
+    font-weight: 600;
   }
+
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
   .conector-row {
-    display: flex; align-items: center; gap: 0;
-    padding: 0 20px; margin: 20px 0 4px;
+    display: flex;
+    align-items: stretch;
+    position: relative;
   }
+
   .prog-block {
-    flex: 1; background: #f4f7fd;
-    border-radius: 14px; padding: 14px 14px 12px;
-    border: 1.5px solid #dde6f5; position: relative;
+    flex: 1;
+    background: #f4f7fd;
+    border-radius: 20px;
+    border: 2px solid #dde6f5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
-  .prog-block.left  { border-top: 3px solid #002f6c; }
-  .prog-block.right { border-top: 3px solid #ab163f; }
+
+  .prog-block.left { border-top: 6px solid #002f6c; }
+  .prog-block.right { border-top: 6px solid #ab163f; }
+
   .prog-badge {
-    font-size: 7.5px; text-transform: uppercase; letter-spacing: 1.2px;
-    font-weight: 700; margin-bottom: 6px; display: inline-block;
-    padding: 2px 8px; border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 800;
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 30px;
+    align-self: flex-start;
   }
+
   .prog-badge.azul { background: #dce9fb; color: #002f6c; }
-  .prog-badge.rosa { background: #f9e4ed; color: #ab163f; }
+  .prog-badge.rosa { background: #f7dde4; color: #ab163f; }
+
   .prog-title {
-    font-size: 11px; font-weight: 700; color: #002f6c;
-    margin-bottom: 8px; line-height: 1.3;
+    font-weight: 900;
+    color: #002f6c;
+    line-height: 1.2;
   }
-  .prog-item { display: flex; align-items: flex-start; gap: 5px; margin-bottom: 4px; }
+
+  .prog-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
   .prog-dot {
-    width: 5px; height: 5px; border-radius: 50%;
-    margin-top: 4px; flex-shrink: 0;
+    border-radius: 50%;
+    flex-shrink: 0;
   }
+
   .prog-dot.azul { background: #002f6c; }
   .prog-dot.rosa { background: #ab163f; }
-  .prog-dot.gris { background: #aab; }
-  .prog-text { font-size: 9px; color: #3a4a66; line-height: 1.4; }
-  .prog-meta { color: #7a8aaa; }
-  .plus-circle {
-    width: 36px; height: 36px; border-radius: 50%;
-    background: #002f6c; color: #fff;
-    font-size: 20px; font-weight: 700;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; margin: 0 8px;
-    box-shadow: 0 0 0 4px #fff, 0 0 0 5px #dde6f5;
-    position: relative; z-index: 2;
+  .prog-dot.gris { background: #8e9bb0; }
+
+  .prog-text {
+    color: #2d3b52;
+    line-height: 1.3;
+    font-weight: 700;
   }
-  .arrow-tag {
-    display: flex; align-items: center; justify-content: center; gap: 6px;
+
+  .prog-meta {
+    color: #5c6c8a;
+    font-weight: 800;
+  }
+
+  .divider-dots {
+    border: none;
+    border-top: 2px dashed #c8d4e8;
+  }
+
+  .arrow-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .arrow-circle-wrapper {
+    background: #dde6f5;
+    padding: 3px;
+    border-radius: 50%;
+    z-index: 2;
+  }
+
+  .arrow-circle {
+    border-radius: 50%;
     background: #002f6c;
-    margin: 4px 20px 0; border-radius: 10px; padding: 8px 14px;
+    color: #ffffff;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #ffffff;
   }
-  .arrow-tag-text {
-    font-size: 9px; color: #fff; font-weight: 600;
-    letter-spacing: 0.5px; line-height: 1.4; text-align: center;
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
   }
-  .arrow-tag-text span { color: #f4b8cf; }
-  .beneficios {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 8px; padding: 16px 20px 4px;
+
+  .feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 14px;
   }
-  .ben-item {
-    display: flex; align-items: center; gap: 8px;
-    background: #f8faff; border-radius: 10px;
-    padding: 8px 10px; border: 1px solid #e8eef8;
+
+  .feature-item span {
+    font-weight: 800;
+    color: #ab163f;
+    line-height: 1.2;
   }
-  .ben-icon { font-size: 18px; flex-shrink: 0; }
-  .ben-label { font-size: 8.5px; font-weight: 700; color: #002f6c; line-height: 1.2; }
-  .ben-sub { font-size: 7.5px; color: #7a8aaa; line-height: 1.3; margin-top: 1px; }
-  .acred-row {
-    display: flex; align-items: center; justify-content: center;
-    gap: 16px; padding: 8px 20px 14px;
+
+  .cta-container {
+    background: #ab163f;
+    border-radius: 20px;
+    text-align: center;
+    flex-shrink: 0;
   }
-  .acred-chip { font-size: 8px; color: #222; display: flex; align-items: center; gap: 4px; font-weight: 600; }
-  .cta-block {
-    margin: 0 20px 20px; background: #002f6c;
-    border-radius: 14px; padding: 16px 18px; text-align: center;
+
+  .cta-title {
+    color: #ffffff;
+    font-weight: 800;
+    letter-spacing: 0.5px;
   }
-  .cta-label { font-size: 10px; color: rgba(255,255,255,0.7); margin-bottom: 8px; }
-  .cta-btn {
-    display: block; background: #fff; color: #c26087;
-    border-radius: 10px; padding: 10px 0;
-    font-size: 13px; font-weight: 700; text-decoration: none;
-    font-family: 'Nunito Sans', sans-serif;
+
+  .cta-button {
+    display: block;
+    background: #ffffff;
+    color: #ab163f;
+    border-radius: 12px;
+    font-weight: 900;
+    text-decoration: none;
+    letter-spacing: 0.5px;
   }
-  .cta-hint { font-size: 9px; color: rgba(255,255,255,0.5); margin-top: 8px; }
-  .untref-logo-sub { font-family: 'Archivo', sans-serif; font-weight: 400; font-stretch: 75%; }
+
+  .cta-footer {
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .format-1-1 { width: 1080px; height: 1080px; }
+  .format-1-1 .hero { padding: 22px 40px 14px; }
+  .format-1-1 .pae-label { margin-top: 4px; margin-bottom: 4px; font-size: 18px; }
+  .format-1-1 .hero-eyebrow { margin-bottom: 3px; font-size: 15px; }
+  .format-1-1 .hero-title { font-size: 40px; margin-bottom: 4px; }
+  .format-1-1 .hero-sub { font-size: 18.5px; max-width: 900px; }
+  .format-1-1 .main-content { padding: 12px 40px 8px; }
+  .format-1-1 .conector-row { gap: 14px; }
+  .format-1-1 .prog-block { padding: 16px 18px; border-radius: 18px; }
+  .format-1-1 .prog-badge { font-size: 15px; padding: 4px 12px; margin-bottom: 6px; }
+  .format-1-1 .prog-title { font-size: 24px; margin-bottom: 8px; font-weight: 900; }
+  .format-1-1 .prog-item { margin-bottom: 4px; gap: 8px; }
+  .format-1-1 .prog-dot { width: 9px; height: 9px; margin-top: 8px; }
+  .format-1-1 .prog-text { font-size: 19.5px; line-height: 1.28; font-weight: 700; }
+  .format-1-1 .prog-meta { font-size: 18px; font-weight: 800; }
+  .format-1-1 .divider-dots { margin: 8px 0; }
+  .format-1-1 .arrow-circle { width: 42px; height: 42px; font-size: 22px; }
+  .format-1-1 .features-grid { gap: 10px; margin: 6px 0; }
+  .format-1-1 .feature-item { padding: 8px 6px; border-radius: 12px; }
+  .format-1-1 .feature-item svg { width: 26px; height: 26px; margin-bottom: 3px; }
+  .format-1-1 .feature-item span { font-size: 14.5px; font-weight: 800; }
+  .format-1-1 .cta-container { margin: 0 40px 14px; padding: 12px 20px; border-radius: 16px; }
+  .format-1-1 .cta-title { font-size: 18px; margin-bottom: 4px; }
+  .format-1-1 .cta-button { padding: 10px 0; font-size: 24px; border-radius: 10px; }
+  .format-1-1 .cta-footer { font-size: 14px; margin-top: 4px; }
+
+  .format-4-5 { width: 1080px; height: 1350px; }
+  .format-4-5 .hero { padding: 32px 48px 20px; }
+  .format-4-5 .pae-label { margin-top: 8px; margin-bottom: 6px; font-size: 20px; }
+  .format-4-5 .hero-eyebrow { margin-bottom: 4px; font-size: 18px; }
+  .format-4-5 .hero-title { font-size: 46px; margin-bottom: 8px; }
+  .format-4-5 .hero-sub { font-size: 21px; max-width: 920px; }
+  .format-4-5 .main-content { padding: 18px 48px; }
+  .format-4-5 .conector-row { gap: 16px; }
+  .format-4-5 .prog-block { padding: 22px 20px; }
+  .format-4-5 .prog-badge { font-size: 16px; margin-bottom: 8px; padding: 5px 14px; }
+  .format-4-5 .prog-title { font-size: 28px; margin-bottom: 12px; font-weight: 900; }
+  .format-4-5 .prog-item { margin-bottom: 6px; gap: 10px; }
+  .format-4-5 .prog-dot { width: 10px; height: 10px; margin-top: 9px; }
+  .format-4-5 .prog-text { font-size: 22px; font-weight: 700; }
+  .format-4-5 .prog-meta { font-size: 20px; font-weight: 800; }
+  .format-4-5 .divider-dots { margin: 10px 0; }
+  .format-4-5 .arrow-circle { width: 46px; height: 46px; font-size: 24px; }
+  .format-4-5 .features-grid { gap: 12px; }
+  .format-4-5 .feature-item { padding: 12px 6px; }
+  .format-4-5 .feature-item svg { width: 34px; height: 34px; margin-bottom: 4px; }
+  .format-4-5 .feature-item span { font-size: 16.5px; font-weight: 800; }
+  .format-4-5 .cta-container { margin: 0 48px 30px; padding: 20px 24px; }
+  .format-4-5 .cta-title { font-size: 22px; margin-bottom: 8px; }
+  .format-4-5 .cta-button { padding: 13px 0; font-size: 28px; }
+  .format-4-5 .cta-footer { font-size: 16px; margin-top: 8px; }
+
+  .format-9-16 { width: 1080px; height: 1920px; }
+  .format-9-16 .hero { padding: 50px 48px 28px; }
+  .format-9-16 .pae-label { margin-top: 18px; margin-bottom: 8px; font-size: 22px; }
+  .format-9-16 .hero-eyebrow { margin-bottom: 6px; font-size: 20px; }
+  .format-9-16 .hero-title { font-size: 52px; margin-bottom: 12px; }
+  .format-9-16 .hero-sub { font-size: 23px; max-width: 920px; }
+  .format-9-16 .main-content { padding: 24px 48px; }
+  .format-9-16 .conector-row { flex-direction: column; gap: 18px; align-items: center; }
+  .format-9-16 .prog-block { width: 100%; padding: 26px 24px; }
+  .format-9-16 .prog-badge { font-size: 17px; padding: 6px 16px; margin-bottom: 10px; }
+  .format-9-16 .prog-title { font-size: 32px; margin-bottom: 14px; font-weight: 900; }
+  .format-9-16 .prog-item { margin-bottom: 8px; gap: 10px; }
+  .format-9-16 .prog-dot { width: 11px; height: 11px; margin-top: 9px; }
+  .format-9-16 .prog-text { font-size: 24px; font-weight: 700; }
+  .format-9-16 .prog-meta { font-size: 21.5px; font-weight: 800; }
+  .format-9-16 .divider-dots { margin: 12px 0; }
+  .format-9-16 .arrow-circle { width: 50px; height: 50px; font-size: 26px; transform: rotate(90deg); }
+  .format-9-16 .features-grid { gap: 14px; }
+  .format-9-16 .feature-item { padding: 16px 10px; border-radius: 16px; }
+  .format-9-16 .feature-item svg { width: 40px; height: 40px; margin-bottom: 6px; }
+  .format-9-16 .feature-item span { font-size: 18px; font-weight: 800; }
+  .format-9-16 .cta-container { margin: 0 48px 40px; padding: 24px 28px; }
+  .format-9-16 .cta-title { font-size: 22px; margin-bottom: 10px; }
+  .format-9-16 .cta-button { padding: 15px 0; font-size: 30px; }
+  .format-9-16 .cta-footer { font-size: 17px; margin-top: 10px; }
 </style>
 </head>
 <body>
-<div class="flyer-root">
 
-  <!-- HERO -->
-  <div class="hero">
-    <svg width="120" height="71" viewBox="49 49 471 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="UNTREF - Universidad Nacional de Tres de Febrero" style="display:block; margin-bottom:10px;">
-      <defs>
-        <clipPath id="clipPath20-header" clipPathUnits="userSpaceOnUse">
-          <path d="M 0,195.368 H 412.491 V 0 H 0 Z" />
-        </clipPath>
-      </defs>
-      <g transform="matrix(1.3333333,0,0,-1.3333333,0,260.49067)">
-        <path d="M 357.621,54.871 H 54.871 v 11.347 h 302.75 z" style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" />
-        <g clip-path="url(#clipPath20-header)">
+<div class="toolbar">
+  <div class="toolbar-group">
+    <label for="formatSelect">Formato Instagram:</label>
+    <select id="formatSelect" onchange="changeFormat(this.value)">
+      <option value="1-1" selected>Feed Cuadrado (1:1 • 1080×1080 px)</option>
+      <option value="4-5">Feed Vertical (4:5 • 1080×1350 px)</option>
+      <option value="9-16">Story / Reel (9:16 • 1080×1920 px)</option>
+    </select>
+  </div>
+
+  <div class="toolbar-group">
+    <label for="scaleSelect">Zoom:</label>
+    <select id="scaleSelect" onchange="updateScale(this.value)">
+      <option value="auto" selected>Auto-Ajustar a Vista Previa</option>
+      <option value="0.35">35%</option>
+      <option value="0.5">50%</option>
+      <option value="0.75">75%</option>
+      <option value="1">100% (1080px Nativo)</option>
+    </select>
+  </div>
+
+  <span class="badge-dim" id="dimBadge">Feed Cuadrado • 1080 × 1080 px</span>
+
+  <button class="btn-download" onclick="downloadImage()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Descargar Imagen HD (PNG)
+  </button>
+</div>
+
+<div class="canvas-viewport" id="viewport">
+  <div class="flyer-root format-1-1" id="flyerCard">
+
+    <!-- HERO / ENCABEZADO -->
+    <div class="hero">
+      <div class="hero-bg-circle-1"></div>
+      <div class="hero-bg-circle-2"></div>
+
+      <!-- LOGO UNTREF VECTORIAL ORIGINAL -->
+      <svg width="220" height="105" viewBox="49 49 530 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="UNTREF" style="display:block; position:relative; z-index:1; margin-bottom: 2px;">
+        <g transform="matrix(1.3333333,0,0,-1.3333333,0,260.49067)">
+          <path d="M 357.621,54.871 H 54.871 v 11.347 h 302.75 z" style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"/>
           <g transform="translate(271.9521,85.627)">
-            <path d="M 0,0 V 54.871 H 36.154 V 45.808 H 10.936 V 33.001 h 23.05 V 23.938 H 10.936 V 9.063 h 26.4 V 0 Z M 50.832,0 V 54.871 H 85.509 V 45.808 H 61.767 V 33.001 H 83.341 V 23.938 H 61.767 V 0 Z m -96.737,0 h -10.936 v 54.871 h 22.756 c 12.117,0 18.126,-5.517 18.126,-16.55 0,-8.669 -4.334,-13.004 -8.373,-14.383 L -15.071,0 h -11.92 l -8.078,21.771 h -10.836 z m 0,30.538 h 8.964 c 6.403,0 9.555,1.774 9.555,7.783 0,6.009 -3.152,7.782 -9.555,7.782 h -8.964 z m -45.907,15.171 h -13.89 v 9.162 h 38.813 v -9.162 h -13.89 V 0 H -91.812 Z M -158.11,0 v 54.871 h 12.905 l 18.126,-36.745 h 0.493 v 36.745 h 10.541 V 0 h -12.708 l -18.52,38.222 h -0.493 V 0 Z m -58.81,54.871 h 11.032 V 16.845 c 0,-6.304 3.152,-8.767 9.457,-8.767 6.306,0 9.556,2.463 9.556,8.767 v 38.026 h 10.935 V 16.845 c 0,-11.919 -7.289,-17.83 -20.491,-17.83 -13.2,0 -20.489,5.911 -20.489,17.929 z" style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+            <path d="M 0,0 V 54.871 H 36.154 V 45.808 H 10.936 V 33.001 h 23.05 V 23.938 H 10.936 V 9.063 h 26.4 V 0 Z M 50.832,0 V 54.871 H 85.509 V 45.808 H 61.767 V 33.001 H 83.341 V 23.938 H 61.767 V 0 Z m -96.737,0 h -10.936 v 54.871 h 22.756 c 12.117,0 18.126,-5.517 18.126,-16.55 0,-8.669 -4.334,-13.004 -8.373,-14.383 L -15.071,0 h -11.92 l -8.078,21.771 h -10.836 z m 0,30.538 h 8.964 c 6.403,0 9.555,1.774 9.555,7.783 0,6.009 -3.152,7.782 -9.555,7.782 h -8.964 z m -45.907,15.171 h -13.89 v 9.162 h 38.813 v -9.162 h -13.89 V 0 H -91.812 Z M -158.11,0 v 54.871 h 12.905 l 18.126,-36.745 h 0.493 v 36.745 h 10.541 V 0 h -12.708 l -18.52,38.222 h -0.493 V 0 Z m -58.81,54.871 h 11.032 V 16.845 c 0,-6.304 3.152,-8.767 9.457,-8.767 6.306,0 9.556,2.463 9.556,8.767 v 38.026 h 10.935 V 16.845 c 0,-11.919 -7.289,-17.83 -20.491,-17.83 -13.2,0 -20.489,5.911 -20.489,17.929 z" style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"/>
           </g>
         </g>
-      </g>
-      <g class="untref-logo-sub" fill="#ffffff">
-        <text x="73" y="240" font-size="33.95" letter-spacing="5.36">UNIVERSIDAD NACIONAL</text>
-        <text x="73" y="305" font-size="33.95" letter-spacing="5.36">DE TRES DE FEBRERO</text>
-      </g>
-    </svg>
-    <div class="pae-label">Programa de Posgrados en Política y Administración de la Educación</div>
-    <div class="hero-eyebrow">Trayectoria integrada</div>
-    <div class="hero-title">Dos posgrados, <span>un solo camino</span></div>
-    <div class="hero-sub">Especialización + Maestría con reconocimiento de seminarios.<br>Formación para transformar la gestión educativa.</div>
+        <g fill="#ffffff" font-family="'Archivo', sans-serif" font-weight="700">
+          <text x="73" y="240" font-size="31" letter-spacing="3.8">UNIVERSIDAD NACIONAL</text>
+          <text x="73" y="305" font-size="31" letter-spacing="3.8">DE TRES DE FEBRERO</text>
+        </g>
+      </svg>
+
+      <div class="pae-label">Programa de Posgrados en Política y Administración de la Educación</div>
+      <div class="hero-eyebrow">Trayectoria integrada</div>
+      <div class="hero-title">Dos posgrados, <span>un solo camino</span></div>
+      <div class="hero-sub">Especialización + Maestría con reconocimiento de seminarios.<br>Formación para transformar la gestión educativa.</div>
+    </div>
+
+    <div class="main-content">
+      
+      <!-- PROGRAMAS ACADÉMICOS -->
+      <div class="conector-row">
+        <!-- Especialización -->
+        <div class="prog-block left">
+          <div>
+            <div class="prog-badge azul">Especialización</div>
+            <div class="prog-title">Planeamiento y Gestión de la Educación</div>
+            <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">Planeamiento y Gestión de Políticas Educativas</div></div>
+            <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">Políticas y Sistemas Educativos</div></div>
+            <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">Teorías de la Administración y de las Organizaciones</div></div>
+            <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">Gestión y Evaluación de Programas Educativos</div></div>
+            <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">Problemas Filosóficos de la Educación Contemporánea</div></div>
+            <hr class="divider-dots">
+            <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">Planificación y Gestión de Políticas Públicas</div></div>
+            <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">+ 3 Seminarios Electivos</div></div>
+            <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">+ Pasantía</div></div>
+          </div>
+          <div class="prog-item" style="margin-top:8px;"><div class="prog-dot gris"></div><div class="prog-text prog-meta" style="color:#002f6c;">15 meses + Trabajo Final</div></div>
+        </div>
+
+        <!-- Flecha de articulación -->
+        <div class="arrow-divider">
+          <div class="arrow-circle-wrapper">
+            <div class="arrow-circle">→</div>
+          </div>
+        </div>
+
+        <!-- Maestría -->
+        <div class="prog-block right">
+          <div>
+            <div class="prog-badge rosa">Maestría</div>
+            <div class="prog-title" style="color:#ab163f;">Política y Administración de la Educación</div>
+            <div class="prog-item"><div class="prog-dot rosa"></div><div class="prog-text">Epistemología y Métodos de Investigación</div></div>
+            <div class="prog-item"><div class="prog-dot rosa"></div><div class="prog-text">Gestión y Evaluación de Instituciones Educativas</div></div>
+            <div class="prog-item"><div class="prog-dot rosa"></div><div class="prog-text">Desarrollo Curricular y Calidad de la Educación</div></div>
+            <div class="prog-item"><div class="prog-dot rosa"></div><div class="prog-text">+ 4 Seminarios Electivos</div></div>
+            <div class="prog-item"><div class="prog-dot rosa"></div><div class="prog-text">+ Taller de Tesis</div></div>
+            <div class="prog-item"><div class="prog-dot rosa"></div><div class="prog-text">+ Pasantía de investigación</div></div>
+          </div>
+          <div class="prog-item" style="margin-top:8px;"><div class="prog-dot gris"></div><div class="prog-text prog-meta" style="color:#ab163f;">24 meses + Tesis</div></div>
+        </div>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#ab163f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/><polyline points="9,11 12,14 15,11"/></svg>
+          <span>Acreditados<br>CONEAU</span>
+        </div>
+        <div class="feature-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#ab163f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span>Cursada<br>mixta</span>
+        </div>
+        <div class="feature-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#ab163f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          <span>Plantel docente<br>destacado</span>
+        </div>
+        <div class="feature-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#ab163f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          <span>Maipú 71<br>CABA</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cta-container">
+      <div class="cta-title">Consultas</div>
+      <a href="mailto:pae@untref.edu.ar" class="cta-button">pae@untref.edu.ar</a>
+      <div class="cta-footer">Universidad Nacional de Tres de Febrero</div>
+    </div>
+
   </div>
-
-  <!-- PROGRAMAS -->
-  <div class="conector-row">
-    <div class="prog-block left">
-      <div class="prog-badge azul">Especialización</div>
-      <div class="prog-title">Planeamiento y Gestión de la Educación</div>
-      <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">Planeamiento y Gestión de Políticas Educativas</div></div>
-      <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">Políticas y Sistemas Educativos</div></div>
-      <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">Teorías de la Administración y de las Organizaciones</div></div>
-      <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">Gestión y Evaluación de Programas</div></div>
-      <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">Problemas Filosóficos de la Educación Contemporánea</div></div>
-      <div style="border-top: 1px dashed #b0bcd4; margin: 6px 0;"></div>
-      <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">Planificación y Gestión de Políticas Públicas</div></div>
-      <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">+ 3 Seminarios Electivos</div></div>
-      <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">+ Pasantía</div></div>
-      <div class="prog-item" style="margin-top:6px"><div class="prog-dot gris"></div><div class="prog-text" style="color:#6ca6bc; font-weight:700;">15 meses + Trabajo Final</div></div>
-    </div>
-    <div style="width:36px; height:36px; border-radius:50%; background:#002f6c; color:#fff; font-size:14px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin:0 8px; box-shadow:0 0 0 4px #fff, 0 0 0 5px #dde6f5; position:relative; z-index:2;">→</div>
-    <div class="prog-block right">
-      <div class="prog-badge rosa">Maestría</div>
-      <div class="prog-title">Política y Administración de la Educación</div>
-      <div class="prog-item"><div class="prog-dot rosa"></div><div class="prog-text">Epistemología y Métodos de Investigación</div></div>
-      <div class="prog-item"><div class="prog-dot rosa"></div><div class="prog-text">Gestión y Evaluación de Instituciones</div></div>
-      <div class="prog-item"><div class="prog-dot rosa"></div><div class="prog-text">Desarrollo Curricular y Calidad</div></div>
-      <div class="prog-item"><div class="prog-dot rosa"></div><div class="prog-text">+ 4 Seminarios Electivos</div></div>
-      <div class="prog-item"><div class="prog-dot rosa"></div><div class="prog-text">+ Taller de Tesis</div></div>
-      <div class="prog-item"><div class="prog-dot rosa"></div><div class="prog-text">+ Pasantía de investigación</div></div>
-      <div class="prog-item" style="margin-top:6px"><div class="prog-dot gris"></div><div class="prog-text" style="color:#ab163f; font-weight:700;">24 meses + Tesis</div></div>
-    </div>
-  </div>
-
-
-
-  <!-- BENEFICIOS COMPACTOS -->
-  <div style="display:flex; justify-content:space-around; align-items:flex-start; padding: 12px 20px 0; gap:4px;">
-    <div style="display:flex; flex-direction:column; align-items:center; gap:3px; flex:1;">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ab163f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/><polyline points="9,11 12,14 15,11"/></svg>
-      <span style="font-size:7px; font-weight:700; color:#ab163f; text-align:center; line-height:1.2;">Acreditados<br>CONEAU</span>
-    </div>
-    <div style="display:flex; flex-direction:column; align-items:center; gap:3px; flex:1;">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ab163f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      <span style="font-size:7px; font-weight:700; color:#ab163f; text-align:center; line-height:1.2;">Cursada<br>mixta</span>
-    </div>
-    <div style="display:flex; flex-direction:column; align-items:center; gap:3px; flex:1;">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ab163f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-      <span style="font-size:7px; font-weight:700; color:#ab163f; text-align:center; line-height:1.2;">Plantel docente<br>destacado</span>
-    </div>
-    <div style="display:flex; flex-direction:column; align-items:center; gap:3px; flex:1;">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ab163f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-      <span style="font-size:7px; font-weight:700; color:#ab163f; text-align:center; line-height:1.2;">Maipú 71<br>CABA</span>
-    </div>
-  </div>
-
-  <!-- CTA COMPACTO -->
-  <div style="margin: 10px 20px 16px; background:#ab163f; border-radius:12px; padding:10px 16px; text-align:center;">
-    <div style="font-size:8.5px; color:#ffffff; margin-bottom:6px;">Consultá por entrevistas de admisión</div>
-    <a href="mailto:pae@untref.edu.ar" style="display:block; background:#fff; color:#ab163f; border-radius:8px; padding:7px 0; font-size:12px; font-weight:700; text-decoration:none; font-family:'Nunito Sans',sans-serif;">pae@untref.edu.ar</a>
-    <div style="font-size:7.5px; color:#ffffff; margin-top:6px;">Universidad Nacional de Tres de Febrero</div>
-  </div>
-
 </div>
+
+<script>
+  let currentFormat = '1-1';
+
+  const formatDimensions = {
+    '1-1': { width: 1080, height: 1080, badge: 'Feed Cuadrado • 1080 × 1080 px' },
+    '4-5': { width: 1080, height: 1350, badge: 'Feed Vertical • 1080 × 1350 px' },
+    '9-16': { width: 1080, height: 1920, badge: 'Story / Reel • 1080 × 1920 px' }
+  };
+
+  function changeFormat(fmt) {
+    currentFormat = fmt;
+    const card = document.getElementById('flyerCard');
+    const badge = document.getElementById('dimBadge');
+
+    card.className = `flyer-root format-${fmt}`;
+    badge.textContent = formatDimensions[fmt].badge;
+
+    autoScale();
+  }
+
+  function autoScale() {
+    const card = document.getElementById('flyerCard');
+    const select = document.getElementById('scaleSelect');
+    const dim = formatDimensions[currentFormat];
+
+    if (select.value === 'auto') {
+      const availWidth = window.innerWidth - 32;
+      const availHeight = window.innerHeight - 140;
+      const scaleX = availWidth / dim.width;
+      const scaleY = availHeight / dim.height;
+      const scale = Math.min(Math.min(scaleX, scaleY), 0.85);
+      
+      card.style.transform = `scale(${scale})`;
+      card.parentElement.style.height = `${dim.height * scale + 20}px`;
+    }
+  }
+
+  function updateScale(val) {
+    const card = document.getElementById('flyerCard');
+    const dim = formatDimensions[currentFormat];
+
+    if (val === 'auto') {
+      autoScale();
+    } else {
+      const scale = parseFloat(val);
+      card.style.transform = `scale(${scale})`;
+      card.parentElement.style.height = `${dim.height * scale + 20}px`;
+    }
+  }
+
+  async function downloadImage() {
+    const sourceCard = document.getElementById('flyerCard');
+    const dim = formatDimensions[currentFormat];
+
+    // Renderizado aislado fuera de pantalla para evitar fondos grises y letras encimadas por transform:scale
+    const container = document.createElement('div');
+    container.style.position = 'absolute';
+    container.style.left = '-9999px';
+    container.style.top = '-9999px';
+    container.style.width = `${dim.width}px`;
+    container.style.height = `${dim.height}px`;
+
+    const clone = sourceCard.cloneNode(true);
+    clone.style.transform = 'none';
+    clone.style.boxShadow = 'none';
+    clone.style.width = `${dim.width}px`;
+    clone.style.height = `${dim.height}px`;
+
+    container.appendChild(clone);
+    document.body.appendChild(container);
+
+    if (document.fonts && document.fonts.ready) {
+      await document.fonts.ready;
+    }
+    await new Promise(resolve => setTimeout(resolve, 150));
+
+    try {
+      const canvas = await html2canvas(clone, {
+        scale: 1,
+        backgroundColor: '#ffffff',
+        useCORS: true,
+        allowTaint: true,
+        logging: false,
+        width: dim.width,
+        height: dim.height,
+        scrollX: 0,
+        scrollY: 0
+      });
+
+      const link = document.createElement('a');
+      link.download = `UNTREF-PAE-Flyer-${currentFormat}.png`;
+      link.href = canvas.toDataURL('image/png', 1.0);
+      link.click();
+    } catch (err) {
+      console.error('Error al generar la imagen HD:', err);
+    } finally {
+      document.body.removeChild(container);
+    }
+  }
+
+  window.addEventListener('resize', autoScale);
+  window.addEventListener('load', autoScale);
+</script>
+
 </body>
 </html>
