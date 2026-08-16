@@ -121,10 +121,13 @@
     transition: transform 0.2s ease;
     flex-shrink: 0;
     overflow: hidden;
+    /* Borde marco #ab163f */
+    border: 12px solid #ab163f;
   }
 
   .hero {
-    background: #002f6c;
+    /* Color azul superior actualizado a #5c79bb */
+    background: #5c79bb;
     position: relative;
     overflow: hidden;
     color: #ffffff;
@@ -189,7 +192,8 @@
     z-index: 1;
     font-weight: 600;
   }
-.hero-tagline {
+
+  .hero-tagline {
     color: #ffffff;
     font-weight: 700;
     font-style: italic;
@@ -197,6 +201,7 @@
     position: relative;
     z-index: 1;
   }
+
   .main-content {
     flex: 1;
     display: flex;
@@ -220,7 +225,7 @@
     justify-content: space-between;
   }
 
-  .prog-block.left { border-top: 6px solid #002f6c; }
+  .prog-block.left { border-top: 6px solid #5c79bb; }
   .prog-block.right { border-top: 6px solid #ab163f; }
 
   .prog-badge {
@@ -233,12 +238,12 @@
     align-self: flex-start;
   }
 
-  .prog-badge.azul { background: #dce9fb; color: #002f6c; }
+  .prog-badge.azul { background: #dce9fb; color: #5c79bb; }
   .prog-badge.rosa { background: #f7dde4; color: #ab163f; }
 
   .prog-title {
     font-weight: 900;
-    color: #002f6c;
+    color: #5c79bb;
     line-height: 1.2;
   }
 
@@ -253,7 +258,7 @@
     flex-shrink: 0;
   }
 
-  .prog-dot.azul { background: #002f6c; }
+  .prog-dot.azul { background: #5c79bb; }
   .prog-dot.rosa { background: #ab163f; }
   .prog-dot.gris { background: #8e9bb0; }
 
@@ -288,7 +293,7 @@
 
   .arrow-circle {
     border-radius: 50%;
-    background: #002f6c;
+    background: #5c79bb;
     color: #ffffff;
     font-weight: 800;
     display: flex;
@@ -320,40 +325,40 @@
 
   .cta-container {
     background: #ab163f;
-    border-radius: 20px;
+    border-radius: 16px;
     text-align: center;
     flex-shrink: 0;
   }
 
   .cta-title {
-    color: #ffffff;
+    color: rgba(255, 255, 255, 0.85);
     font-weight: 800;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
 
   .cta-button {
-    display: block;
-    background: #ffffff;
-    color: #ab163f;
-    border-radius: 12px;
+    display: inline-block;
+    color: #ffffff;
     font-weight: 900;
     text-decoration: none;
     letter-spacing: 0.5px;
   }
 
   .cta-footer {
-    color: rgba(255, 255, 255, 0.95);
+    color: rgba(255, 255, 255, 0.9);
     font-weight: 700;
     letter-spacing: 0.5px;
   }
 
+  /* FORMATO 1:1 */
   .format-1-1 { width: 1080px; height: 1080px; }
   .format-1-1 .hero { padding: 22px 40px 14px; }
   .format-1-1 .pae-label { margin-top: 4px; margin-bottom: 4px; font-size: 18px; }
   .format-1-1 .hero-eyebrow { margin-bottom: 3px; font-size: 15px; }
   .format-1-1 .hero-title { font-size: 40px; margin-bottom: 4px; }
   .format-1-1 .hero-sub { font-size: 18.5px; max-width: 900px; }
- format-1-1 .hero-tagline { font-size: 30px; margin-top: 8px; }
+  .format-1-1 .hero-tagline { font-size: 30px; margin-top: 8px; }
   .format-1-1 .main-content { padding: 12px 40px 8px; }
   .format-1-1 .conector-row { gap: 14px; }
   .format-1-1 .prog-block { padding: 16px 18px; border-radius: 18px; }
@@ -369,11 +374,12 @@
   .format-1-1 .feature-item { padding: 8px 6px; border-radius: 12px; }
   .format-1-1 .feature-item svg { width: 26px; height: 26px; margin-bottom: 3px; }
   .format-1-1 .feature-item span { font-size: 14.5px; font-weight: 800; }
-  .format-1-1 .cta-container { margin: 0 40px 14px; padding: 12px 20px; border-radius: 16px; }
-  .format-1-1 .cta-title { font-size: 18px; margin-bottom: 4px; }
-  .format-1-1 .cta-button { padding: 10px 0; font-size: 24px; border-radius: 10px; }
-  .format-1-1 .cta-footer { font-size: 14px; margin-top: 4px; }
+  .format-1-1 .cta-container { margin: 0 40px 10px; padding: 10px 20px; border-radius: 14px; }
+  .format-1-1 .cta-title { font-size: 13.5px; margin-bottom: 2px; }
+  .format-1-1 .cta-button { font-size: 23px; }
+  .format-1-1 .cta-footer { font-size: 13.5px; margin-top: 2px; }
 
+  /* FORMATO 4:5 */
   .format-4-5 { width: 1080px; height: 1350px; }
   .format-4-5 .hero { padding: 32px 48px 20px; }
   .format-4-5 .pae-label { margin-top: 8px; margin-bottom: 6px; font-size: 20px; }
@@ -395,11 +401,12 @@
   .format-4-5 .feature-item { padding: 12px 6px; }
   .format-4-5 .feature-item svg { width: 34px; height: 34px; margin-bottom: 4px; }
   .format-4-5 .feature-item span { font-size: 16.5px; font-weight: 800; }
-  .format-4-5 .cta-container { margin: 0 48px 30px; padding: 20px 24px; }
-  .format-4-5 .cta-title { font-size: 22px; margin-bottom: 8px; }
-  .format-4-5 .cta-button { padding: 13px 0; font-size: 28px; }
-  .format-4-5 .cta-footer { font-size: 16px; margin-top: 8px; }
+  .format-4-5 .cta-container { margin: 0 48px 20px; padding: 14px 24px; border-radius: 16px; }
+  .format-4-5 .cta-title { font-size: 15px; margin-bottom: 4px; }
+  .format-4-5 .cta-button { font-size: 26px; }
+  .format-4-5 .cta-footer { font-size: 15px; margin-top: 4px; }
 
+  /* FORMATO 9:16 */
   .format-9-16 { width: 1080px; height: 1920px; }
   .format-9-16 .hero { padding: 50px 48px 28px; }
   .format-9-16 .pae-label { margin-top: 18px; margin-bottom: 8px; font-size: 22px; }
@@ -421,9 +428,10 @@
   .format-9-16 .feature-item { padding: 16px 10px; border-radius: 16px; }
   .format-9-16 .feature-item svg { width: 40px; height: 40px; margin-bottom: 6px; }
   .format-9-16 .feature-item span { font-size: 18px; font-weight: 800; }
-  .format-9-16 .cta-container { margin: 0 48px 40px; padding: 24px 28px; }
-  .format-9-16 .cta-title { font-size: 22px; margin-bottom: 10px; }
-  .format-9-16 .cta-button { padding: 15px 0; font-size: 30px; }
+  .format-9-16 .cta-container { margin: 0 48px 30px; padding: 18px 28px; border-radius: 18px; }
+  .format-9-16 .cta-title { font-size: 16px; margin-bottom: 4px; }
+  .format-9-16 .cta-button { font-size: 28px; }
+  .format-9-16 .cta-footer { font-size: 16px; margin-top: 6px; }
   .format-9-16 .cta-footer { font-size: 17px; margin-top: 10px; }
 </style>
 </head>
@@ -506,7 +514,7 @@
             <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">+ 3 Seminarios Electivos</div></div>
             <div class="prog-item"><div class="prog-dot azul"></div><div class="prog-text">+ Pasantía</div></div>
           </div>
-          <div class="prog-item" style="margin-top:8px;"><div class="prog-dot gris"></div><div class="prog-text prog-meta" style="color:#002f6c;">15 meses + Trabajo Final</div></div>
+          <div class="prog-item" style="margin-top:8px;"><div class="prog-dot gris"></div><div class="prog-text prog-meta" style="color:#5c79bb;">15 meses + Trabajo Final</div></div>
         </div>
 
         <!-- Flecha de articulación -->
